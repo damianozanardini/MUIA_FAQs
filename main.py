@@ -47,6 +47,9 @@ with st.sidebar:
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
 # make sure to export your NVIDIA AI Playground key as NVIDIA_API_KEY!
+import os
+os.environ["NVIDIA_API_KEY"] = "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"
+
 #llm = ChatNVIDIA(model="mixtral_8x7b")
 document_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="passage")
 query_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="query")
