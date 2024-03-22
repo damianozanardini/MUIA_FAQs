@@ -57,6 +57,22 @@ document_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="passage")
 query_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="query")
 
 ############################################
+# User Feedback
+############################################
+
+# TO-DO: add a "was it useful" button such that the content of the last question and answer is stored automatically
+
+def input_callback():
+    with st.sidebar:
+        st.success("¡Gracias!")
+with st.sidebar:
+    improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
+                                 value="",
+                                 on_change=input_callback)
+    with open("improvements.csv", "a") as f:
+        f.write(f"{improvements}\n")
+
+############################################
 # Component #3 - Vector Database Store
 ############################################
 
@@ -71,13 +87,6 @@ if USE_SIDEBAR:
         use_existing_vector_store = st.radio("Use existing vector store if available", [True, False], horizontal=True)
 else:
     use_existing_vector_store = True
-
-with st.sidebar:
-    improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
-                                 value="")
-    with open("improvements.csv", "a") as f:
-        f.write(f"{improvements}\n")
-    st.success("¡Gracias!")
 
 # Path to the vector store file
 vector_store_path = "vectorstore.pkl"
