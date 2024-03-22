@@ -22,6 +22,7 @@
 
 import streamlit as st
 import os
+import csv
 
 st.set_page_config(layout = "wide")
 
@@ -69,8 +70,21 @@ with st.sidebar:
     improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
                                  value="",
                                  on_change=input_callback)
-    with open("improvements.csv", "a") as f:
+    with open("improvements.txt", "a") as f:
         f.write(f"{improvements}\n")
+
+def storeQuery(good_or_bad):
+    with open(f"{good_or_bad}Ones.csv","a",newline='') as f:
+        writer = csv.writer(f, delimiter=",", quotechar='"',quoting=csv.QUOTE_MINIMAL)
+        writer.writerow([user_input,full_response])
+    st.success("¡Gracias por la retroalimentación! No dudes en hacerme otras preguntas")
+
+def storeGood():
+    storeQuery("good")
+
+def storeBad():
+    storeQuery("bad")
+
 
 ############################################
 # Component #3 - Vector Database Store
@@ -122,9 +136,7 @@ else:
             else:
                 st.warning("No documents available to process!", icon="⚠️")
     else:
-        st.write("XXX")
         if raw_documents:
-            st.write("XXX")
             text_splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
             documents = text_splitter.split_documents(raw_documents)
             vectorstore = FAISS.from_documents(documents, document_embedder)
@@ -180,3 +192,9 @@ if user_input and vectorstore!=None:
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
+
+    _, col2, col3, _ = st.columns(4)
+    with col2:
+        st.button(label="Me has sido útil",on_click=storeGood)
+    with col3:
+        st.button(label="No has contestado correctamente",on_click=storeBad)
