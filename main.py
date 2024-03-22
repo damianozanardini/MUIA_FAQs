@@ -72,6 +72,13 @@ if USE_SIDEBAR:
 else:
     use_existing_vector_store = True
 
+with st.sidebar:
+    improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
+                                 value="")
+    with open("improvements.csv", "a") as f:
+        f.write(f"{improvements}\n")
+    st.success("¡Gracias!")
+
 # Path to the vector store file
 vector_store_path = "vectorstore.pkl"
 
@@ -120,6 +127,8 @@ else:
 ############################################
 
 st.subheader("MUIA - FAQs")
+
+st.write("Esta aplicación pretende ser una ayuda para que puedas solucionar tus dudas sin pasar necesariamente por los emails de contacto (que siguen estando, por supuesto...)")
 st.write("**DISCLAIMER**: la información que recibirás de este bot ha sido generada usando un **LLM** (Large Language Model) con **RAG** (Retrieval-Augmented Generation); en ningún caso ha de ser tomada como definitiva.")
 
 if "messages" not in st.session_state:
