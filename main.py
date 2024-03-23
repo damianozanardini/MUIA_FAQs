@@ -28,7 +28,7 @@ from datetime import datetime
 
 st.set_page_config(layout = "wide")
 
-USE_DRIVE = True
+USE_DRIVE = False
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
 
