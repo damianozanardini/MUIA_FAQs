@@ -56,7 +56,7 @@ if USE_SIDEBAR:
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
 # make sure to export your NVIDIA AI Playground key as NVIDIA_API_KEY! In fact, the key is hardwired here...
-os.environ["NVIDIA_API_KEY"] = "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"
+#os.environ["NVIDIA_API_KEY"] = "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"
 
 document_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="passage")
 query_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="query")
@@ -69,7 +69,6 @@ query_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="query")
 import pydrive
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
-import os
 
 if USE_DRIVE:
     g_login = GoogleAuth()
@@ -182,7 +181,7 @@ else:
 # LLM Response Generation and Chat
 ############################################
 
-st.subheader("MUIA - FAQs")
+st.subheader("MUIA - FAQs 23/03")
 
 st.write("Esta aplicación pretende ser una ayuda para que puedas solucionar tus dudas sin pasar necesariamente por los emails de contacto (que siguen estando, por supuesto...)")
 st.write("**DISCLAIMER**: la información que recibirás de este bot ha sido generada usando un **LLM** (Large Language Model) con **RAG** (Retrieval-Augmented Generation); en ningún caso ha de ser tomada como definitiva.")
