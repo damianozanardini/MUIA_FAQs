@@ -17,17 +17,21 @@
 # It uses a simple Streamlit UI and one file implementation of a minimalistic RAG pipeline.
 
 ############################################
-# Component #1 - Document Loader
+# Document Loader
 ############################################
 
 import streamlit as st
 import os
 import csv
 
+from datetime import datetime
+
 st.set_page_config(layout = "wide")
 
+USE_DRIVE = False
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
+
 
 DOCS_DIR = os.path.abspath("./uploaded_docs")
 if not os.path.exists(DOCS_DIR):
@@ -46,7 +50,7 @@ if USE_SIDEBAR:
                     f.write(uploaded_file.read())
 
 ############################################
-# Component #2 - Embedding Model and LLM
+# Embedding Model and LLM
 ############################################
 
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
@@ -56,6 +60,31 @@ os.environ["NVIDIA_API_KEY"] = "nvapi-hmiRpdWZaaenVZpmYy3Dj9y1y_ag-V7-yMKq94jY0O
 
 document_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="passage")
 query_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="query")
+
+############################################
+# File management
+############################################
+
+# Files are stored into my Google Drive
+import pydrive
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+import os
+
+if USE_DRIVE:
+    g_login = GoogleAuth()
+    g_login.LocalWebserverAuth()
+    drive = GoogleDrive(g_login)
+
+    file_list = drive.ListFile({'q': "'root' in parents"}).GetList()
+
+# Given a file_name (supposed to be an existing local file), it stores its content in a Google Drive file called "MUIA_FAQ_'file_name'"
+def store_file_to_drive(file_name):
+    for f in file_list:
+        if f['title'] == "MUIA_FAQ_" + file_name:
+            f.SetContentFile(file_name)
+            f.Upload()
+            break
 
 ############################################
 # User Feedback
@@ -72,11 +101,17 @@ with st.sidebar:
                                  on_change=input_callback)
     with open("improvements.txt", "a") as f:
         f.write(f"{improvements}\n")
+    if USE_DRIVE:
+        store_file_to_drive("improvements.txt")
 
 def storeQuery(good_or_bad):
+    current_GMT = time.gmtime()
+    time_stamp = datetime.utcfromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
     with open(f"{good_or_bad}Ones.csv","a",newline='') as f:
         writer = csv.writer(f, delimiter=",", quotechar='"',quoting=csv.QUOTE_MINIMAL)
-        writer.writerow([user_input,full_response])
+        writer.writerow([time_stamp,user_input,full_response])
+    if USE_DRIVE:
+        store_file_to_drive(f"{good_or_bad}Ones.csv")
     st.success("¡Gracias por la retroalimentación! No dudes en hacerme otras preguntas")
 
 def storeGood():
@@ -87,7 +122,7 @@ def storeBad():
 
 
 ############################################
-# Component #3 - Vector Database Store
+# Vector Database Store
 ############################################
 
 from langchain.text_splitter import CharacterTextSplitter
@@ -144,7 +179,7 @@ else:
                 pickle.dump(vectorstore, f)
 
 ############################################
-# Component #4 - LLM Response Generation and Chat
+# LLM Response Generation and Chat
 ############################################
 
 st.subheader("MUIA - FAQs")
