@@ -181,7 +181,7 @@ else:
 # LLM Response Generation and Chat
 ############################################
 
-st.subheader("MUIA - FAQs v0.2")
+st.subheader("MUIA - FAQs - v0.2")
 
 st.write("Esta aplicación pretende ser una ayuda para que puedas solucionar tus dudas sin pasar necesariamente por los emails de contacto (que siguen estando, por supuesto...)")
 st.write("**DISCLAIMER**: la información que recibirás de este bot ha sido generada usando un **LLM** (Large Language Model) con **RAG** (Retrieval-Augmented Generation); en ningún caso ha de ser tomada como definitiva.")
