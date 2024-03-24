@@ -28,7 +28,7 @@ from datetime import datetime
 
 st.set_page_config(layout = "wide")
 
-USE_DRIVE = st.query_params["use_drive"]
+USE_DRIVE = st.query_params["use_drive"]=="true"
 
 if USE_DRIVE:
     st.write("CONNECTED TO DRIVE")
