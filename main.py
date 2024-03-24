@@ -33,16 +33,27 @@ if "RUNS_LOCAL" in os.environ:
 else:
     runs_local = False
 
+
+import firebase_admin
 from firebase_admin import firestore
+from firebase_admin import credentials
+from firebase_admin import auth
 
 # Accessing Firestore depending on where the app is running
-if runs_local:
-    # Authenticate to Firestore with the JSON account key.
-    db = firestore.Client.from_service_account_json("firestore-key.json")
-else:
-    # Authenticate to Firestore with the project ID.
-    db = firestore.Client(project="muia-faq")
+@st.experimental_singleton
+def get_db():
+    if runs_local:
+        # Authenticate to Firestore with the JSON account key.
+        #db = firestore.Client.from_service_account_json("firestore-key.json")
+        cred = credentials.Certificate("firestore-key.json")
+        firebase_admin.initialize_app(cred)
+        db = firestore.Client(project="muia-faq")
+    else:
+        # Authenticate to Firestore with the project ID.
+        db = firestore.Client(project="muia-faq")
+    return db
 
+db = get_db()
 
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
@@ -69,9 +80,6 @@ if USE_SIDEBAR:
 
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
-# make sure to export your NVIDIA AI Playground key as NVIDIA_API_KEY! In fact, the key is hardwired here...
-#os.environ["NVIDIA_API_KEY"] = "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"
-
 document_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="passage")
 query_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="query")
 
@@ -79,11 +87,10 @@ query_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="query")
 # User Feedback
 ############################################
 
-# TO-DO: add a "was it useful" button such that the content of the last question and answer is stored automatically
-
 def input_callback():
     with st.sidebar:
         st.success("¡Gracias!")
+
 with st.sidebar:
     improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
                                  value="",
