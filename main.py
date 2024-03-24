@@ -39,11 +39,23 @@ from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth
 
-with open("xxx.txt","w") as f:
-    f.write("Damiajo")
+with open("firestore-key.json","w") as f:
+    f.write("{")
+    for x in ["type",
+              "project_id",
+              "private_key_id",
+              "private_key",
+              "client_email",
+              "client_id",
+              "auth_uri",
+              "token_uri",
+              "auth_provider_x509_cert_url",
+              "client_x509_cert_url",
+              "universe_domain"]:
+        f.write(f'    "{x}": {st.secrets[x]}')
+    f.write("}")
     f.close()
-
-with open("xxx.txt","r") as f:
+with open("firestore-key.json","r") as f:
     st.write(f.read())
 
 # Accessing Firestore depending on where the app is running
@@ -71,7 +83,11 @@ def get_db():
                       "universe_domain"]:
                 f.write(f'    "{x}": {st.secrets[x]}')
             f.write("}")
+            f.close()
+        with open("firestore-key.json","r") as f:
+            st.write(f.read())
         db = firestore.Client.from_service_account_json("firestore-key.json")
+
         # Authenticate to Firestore with the project ID.
         # db = firestore.Client(project="muia-faq")
     return db
