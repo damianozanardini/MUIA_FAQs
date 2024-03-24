@@ -39,11 +39,11 @@ from google.cloud import firestore
 # Accessing Firestore
 st.write(st.query_params)
 if runs_local:
-    # st.write("RUNNING LOCALLY")
+    st.write("RUNNING LOCALLY")
     # Authenticate to Firestore with the JSON account key.
     db = firestore.Client.from_service_account_json("firestore-key.json")
 else:
-    # st.write("RUNNING ON WEB")
+    st.write("RUNNING ON WEB")
     # Authenticate to Firestore with the project ID.
     db = firestore.Client(project="muia-faq")
 
