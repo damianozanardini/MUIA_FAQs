@@ -37,13 +37,11 @@ from google.cloud import firestore
 
 # Accessing Firestore depending on where the app is running
 if runs_local:
-    st.write("RUNNING LOCALLY")
     # Authenticate to Firestore with the JSON account key.
     db = firestore.Client.from_service_account_json("firestore-key.json")
 else:
-    st.write("RUNNING ON WEB")
     # Authenticate to Firestore with the project ID.
-    db = firestore.Client(project="muia-faq")
+    db = firestore.Client()
 
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
