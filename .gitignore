@@ -2,3 +2,5 @@ genai/
 .streamlit/.#secrets.toml
 .streamlit/#secrets.toml#
 .gitignore
+firestore-key.json
+improvements.txt
