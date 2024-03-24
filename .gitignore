@@ -1,1 +1,4 @@
 genai/
+.streamlit/.#secrets.toml
+.streamlit/#secrets.toml#
+.gitignore
