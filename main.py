@@ -41,7 +41,7 @@ if runs_local:
     db = firestore.Client.from_service_account_json("firestore-key.json")
 else:
     # Authenticate to Firestore with the project ID.
-    db = firestore.Client()
+    db = firestore.Client('s4a-prod')
 
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
