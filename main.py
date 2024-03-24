@@ -35,16 +35,16 @@ st.set_page_config(layout = "wide")
 from google.cloud import firestore
 
 # Authenticate to Firestore with the JSON account key.
-#db = firestore.Client.from_service_account_json("firestore-key.json")
+db = firestore.Client.from_service_account_json("firestore-key.json")
 
 # Create a reference to the Google post.
-#doc_ref = db.collection("improvements").document("93BGHWBgQn6jYpRVLchp")
+doc_ref = db.collection("improvements").document("93BGHWBgQn6jYpRVLchp")
 
 # Then get the data at that reference.
-#doc = doc_ref.get()
+doc = doc_ref.get()
 
 # Let's see what we got!
-#st.write("The doc is: ", doc)
+st.write("The doc is: ", doc)
 
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
