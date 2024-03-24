@@ -28,15 +28,14 @@ from datetime import datetime
 
 st.set_page_config(layout = "wide")
 
-import argparse
-parser = argparse.ArgumentParser(description="Command line options")
-parser.add_argument("runlocal")
-args = parser.parse_args()
-runs_local = args.runlocal and args.runlocal == "local"
+if "RUNS_LOCAL" in os.environ:
+    runs_local = os.environ["RUNS_LOCAL"] == "yes"
+else:
+    runs_local = False
 
 from google.cloud import firestore
 
-# Accessing Firestore
+# Accessing Firestore depending on where the app is running
 if runs_local:
     st.write("RUNNING LOCALLY")
     # Authenticate to Firestore with the JSON account key.

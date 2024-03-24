@@ -15,6 +15,8 @@ API Key for using the mixtral_8x7b LLM
 
 > export NVIDIA_API_KEY="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"
 
+> export RUNS_LOCAL="yes"
+
 Run the example using streamlit
 
 > streamlit run main.py
