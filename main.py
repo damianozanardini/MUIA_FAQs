@@ -44,10 +44,10 @@ from firebase_admin import auth
 def get_db():
     if runs_local:
         # Authenticate to Firestore with the JSON account key.
-        #db = firestore.Client.from_service_account_json("firestore-key.json")
-        cred = credentials.Certificate("firestore-key.json")
-        firebase_admin.initialize_app(cred)
-        db = firestore.Client(project="muia-faq")
+        db = firestore.Client.from_service_account_json("firestore-key.json")
+        #cred = credentials.Certificate("firestore-key.json")
+        #firebase_admin.initialize_app(cred)
+        #db = firestore.Client(project="muia-faq")
     else:
         # Authenticate to Firestore with the project ID.
         db = firestore.Client(project="muia-faq")
