@@ -37,15 +37,6 @@ from google.cloud import firestore
 # Authenticate to Firestore with the JSON account key.
 db = firestore.Client.from_service_account_json("firestore-key.json")
 
-# Create a reference to the Google post.
-doc_ref = db.collection("improvements").document("93BGHWBgQn6jYpRVLchp")
-
-# Then get the data at that reference.
-doc = doc_ref.get()
-
-# Let's see what we got!
-st.write("The doc is: ", doc)
-
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
 
@@ -107,14 +98,17 @@ with st.sidebar:
     improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
                                  value="",
                                  on_change=input_callback)
-    with open("improvements.txt", "a") as f:
-        f.write(f"{improvements}\n")
+    time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    data = {"Date": time_stamp,
+            "Text": improvements }
+    db.collection("improvements").document(time_stamp).set(data)
 
 def storeQuery(good_or_bad):
     time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    with open(f"{good_or_bad}Ones.csv","a",newline='') as f:
-        writer = csv.writer(f, delimiter=",", quotechar='"',quoting=csv.QUOTE_MINIMAL)
-        writer.writerow([time_stamp,user_input,full_response])
+    data = {"Date": time_stamp,
+            "Question": user_input,
+            "Answer": full_response }
+    db.collection(f"{good_or_bad}Queries").document(time_stamp).set(data)
     st.success("¡Gracias por la retroalimentación! No dudes en hacerme otras preguntas")
 
 def storeGood():
