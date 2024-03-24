@@ -28,15 +28,23 @@ from datetime import datetime
 
 st.set_page_config(layout = "wide")
 
-if "use_drive" in st.query_params.keys():
-    USE_DRIVE = st.query_params["use_drive"] in ["true","True"] 
-else:
-    USE_DRIVE = False
+#import firebase_admin
+#from firebase_admin import credentials
 
-if USE_DRIVE:
-    st.write("CONNECTED TO DRIVE")
-else:
-    st.write("NOT CONNECTED TO DRIVE")
+
+from google.cloud import firestore
+
+# Authenticate to Firestore with the JSON account key.
+#db = firestore.Client.from_service_account_json("firestore-key.json")
+
+# Create a reference to the Google post.
+#doc_ref = db.collection("improvements").document("93BGHWBgQn6jYpRVLchp")
+
+# Then get the data at that reference.
+#doc = doc_ref.get()
+
+# Let's see what we got!
+#st.write("The doc is: ", doc)
 
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
@@ -78,13 +86,6 @@ import pydrive
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
-if USE_DRIVE:
-    g_login = GoogleAuth()
-    g_login.LocalWebserverAuth()
-    drive = GoogleDrive(g_login)
-
-    file_list = drive.ListFile({'q': "'root' in parents"}).GetList()
-
 # Given a file_name (supposed to be an existing local file), it stores its content in a Google Drive file called "MUIA_FAQ_'file_name'"
 def store_file_to_drive(file_name):
     for f in file_list:
@@ -108,16 +109,12 @@ with st.sidebar:
                                  on_change=input_callback)
     with open("improvements.txt", "a") as f:
         f.write(f"{improvements}\n")
-    if USE_DRIVE:
-        store_file_to_drive("improvements.txt")
 
 def storeQuery(good_or_bad):
     time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     with open(f"{good_or_bad}Ones.csv","a",newline='') as f:
         writer = csv.writer(f, delimiter=",", quotechar='"',quoting=csv.QUOTE_MINIMAL)
         writer.writerow([time_stamp,user_input,full_response])
-    if USE_DRIVE:
-        store_file_to_drive(f"{good_or_bad}Ones.csv")
     st.success("¡Gracias por la retroalimentación! No dudes en hacerme otras preguntas")
 
 def storeGood():
