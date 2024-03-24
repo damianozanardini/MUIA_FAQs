@@ -104,8 +104,7 @@ with st.sidebar:
         store_file_to_drive("improvements.txt")
 
 def storeQuery(good_or_bad):
-    current_GMT = time.gmtime()
-    time_stamp = datetime.utcfromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
+    time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     with open(f"{good_or_bad}Ones.csv","a",newline='') as f:
         writer = csv.writer(f, delimiter=",", quotechar='"',quoting=csv.QUOTE_MINIMAL)
         writer.writerow([time_stamp,user_input,full_response])
