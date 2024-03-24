@@ -28,14 +28,24 @@ from datetime import datetime
 
 st.set_page_config(layout = "wide")
 
-#import firebase_admin
-#from firebase_admin import credentials
-
+import argparse
+parser = argparse.ArgumentParser(description="Command line options")
+parser.add_argument("runlocal")
+args = parser.parse_args()
+runs_local = args.runlocal == "local"
 
 from google.cloud import firestore
 
-# Authenticate to Firestore with the JSON account key.
-db = firestore.Client.from_service_account_json("firestore-key.json")
+# Accessing Firestore
+st.write(st.query_params)
+if runs_local:
+    # st.write("RUNNING LOCALLY")
+    # Authenticate to Firestore with the JSON account key.
+    db = firestore.Client.from_service_account_json("firestore-key.json")
+else:
+    # st.write("RUNNING ON WEB")
+    # Authenticate to Firestore with the project ID.
+    db = firestore.Client(project="muia-faq")
 
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
