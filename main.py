@@ -28,10 +28,15 @@ from datetime import datetime
 
 st.set_page_config(layout = "wide")
 
-USE_DRIVE = False
+USE_DRIVE = st.query_params["use_drive"]
+
+if USE_DRIVE:
+    st.write("CONNECTED TO DRIVE")
+else:
+    st.write("NOT CONNECTED TO DRIVE")
+
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
-
 
 DOCS_DIR = os.path.abspath("./uploaded_docs")
 if not os.path.exists(DOCS_DIR):
