@@ -32,12 +32,11 @@ import argparse
 parser = argparse.ArgumentParser(description="Command line options")
 parser.add_argument("runlocal")
 args = parser.parse_args()
-runs_local = args.runlocal == "local"
+runs_local = args.runlocal and args.runlocal == "local"
 
 from google.cloud import firestore
 
 # Accessing Firestore
-st.write(st.query_params)
 if runs_local:
     st.write("RUNNING LOCALLY")
     # Authenticate to Firestore with the JSON account key.
@@ -77,23 +76,6 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
 document_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="passage")
 query_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="query")
-
-############################################
-# File management
-############################################
-
-# Files are stored into my Google Drive
-import pydrive
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
-
-# Given a file_name (supposed to be an existing local file), it stores its content in a Google Drive file called "MUIA_FAQ_'file_name'"
-def store_file_to_drive(file_name):
-    for f in file_list:
-        if f['title'] == "MUIA_FAQ_" + file_name:
-            f.SetContentFile(file_name)
-            f.Upload()
-            break
 
 ############################################
 # User Feedback
