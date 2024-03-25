@@ -39,31 +39,40 @@ from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth
 
+import json
+
 # Accessing Firestore depending on where the app is running
 @st.cache_resource
 def get_db():
     if runs_local:
-        # Authenticate to Firestore with the JSON account key.
+        # Copy secret information from a local file to the key file; authenticate with such info
+        with open("firestore-key-backup.json","r") as f:
+            fk = json.load(f)
+            f.close()
+        with open("firestore-key.json", "w") as f:
+            json.dump(fk,f)
+            f.close()
         db = firestore.Client.from_service_account_json("firestore-key.json")
         #cred = credentials.Certificate("firestore-key.json")
         #firebase_admin.initialize_app(cred)
         #db = firestore.Client(project="muia-faq")
     else:
+        # Build key file from streamilit secrets
+        fk = {}
+        for x in ["type",
+                  "project_id",
+                  "private_key_id",
+                  "private_key",
+                  "client_email",
+                  "client_id",
+                  "auth_uri",
+                  "token_uri",
+                  "auth_provider_x509_cert_url",
+                  "client_x509_cert_url",
+                  "universe_domain"]:
+            fk[x] = st.secrets[x]
         with open("firestore-key.json","w") as f:
-            f.write("{")
-            for x in ["type",
-                      "project_id",
-                      "private_key_id",
-                      "private_key",
-                      "client_email",
-                      "client_id",
-                      "auth_uri",
-                      "token_uri",
-                      "auth_provider_x509_cert_url",
-                      "client_x509_cert_url"]:
-                f.write(f'    "{x}": "{st.secrets[x]}",\n')
-            f.write(f'    "universe_domain": "{st.secrets["universe_domain"]}"\n')
-            f.write("}")
+            json.dump(fk,f)
             f.close()
         with open("firestore-key.json","r") as f:
             st.write(f.read())
