@@ -24,6 +24,8 @@ import streamlit as st
 import os
 import csv
 
+import calendar
+import time
 from datetime import datetime
 
 st.set_page_config(layout = "wide")
@@ -42,20 +44,16 @@ from firebase_admin import auth
 import json
 
 # Accessing Firestore depending on where the app is running
+# This was tricky because the only way to access the database seems to be vai the information contained
+# in the json key file; however, you can't simply add the file to git! Therefore, we build the json file
+# on the fly from a local file (if running locally) or the streamlit secrets (if deployed)
 @st.cache_resource
-def get_db():
+def get_db(f_name):
     if runs_local:
         # Copy secret information from a local file to the key file; authenticate with such info
-        with open("firestore-key-backup.json","r") as f:
+        with open(f"{f_name}-backup.json","r") as f:
             fk = json.load(f)
             f.close()
-        with open("firestore-key.json", "w") as f:
-            json.dump(fk,f)
-            f.close()
-        db = firestore.Client.from_service_account_json("firestore-key.json")
-        #cred = credentials.Certificate("firestore-key.json")
-        #firebase_admin.initialize_app(cred)
-        #db = firestore.Client(project="muia-faq")
     else:
         # Build key file from streamilit secrets
         fk = {}
@@ -71,18 +69,13 @@ def get_db():
                   "client_x509_cert_url",
                   "universe_domain"]:
             fk[x] = st.secrets[x]
-        with open("firestore-key.json","w") as f:
-            json.dump(fk,f)
-            f.close()
-        with open("firestore-key.json","r") as f:
-            st.write(f.read())
-        db = firestore.Client.from_service_account_json("firestore-key.json")
-
-        # Authenticate to Firestore with the project ID.
-        # db = firestore.Client(project="muia-faq")
+    with open(f"{f_name}.json","w") as f:
+        json.dump(fk,f)
+        f.close()
+    db = firestore.Client.from_service_account_json(f"{f_name}.json")
     return db
 
-db = get_db()
+db = get_db("firestore-key")
 
 USE_SIDEBAR = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
@@ -124,7 +117,10 @@ with st.sidebar:
     improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
                                  value="",
                                  on_change=input_callback)
-    time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    current_GMT = time.gmtime()
+    time_stamp = calendar.timegm(current_GMT)
+    time_stamp = datetime.utcfromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
+    #time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     data = {"Date": time_stamp,
             "Text": improvements }
     db.collection("improvements").document(time_stamp).set(data)
