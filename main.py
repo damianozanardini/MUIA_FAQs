@@ -120,7 +120,8 @@ with st.sidebar:
     current_GMT = time.gmtime()
     time_stamp = calendar.timegm(current_GMT)
     time_stamp = datetime.utcfromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
-    #time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    time_stamp = datetime.now().astimezone().strftime('%Y-%m-%d %H:%M:%S')
+    #time_stamp = datetime.now(datetime.UTC).strftime('%Y-%m-%d %H:%M:%S')
     data = {"Date": time_stamp,
             "Text": improvements }
     db.collection("improvements").document(time_stamp).set(data)
@@ -131,7 +132,7 @@ def storeQuery(good_or_bad):
             "Question": user_input,
             "Answer": full_response }
     db.collection(f"{good_or_bad}Queries").document(time_stamp).set(data)
-    st.success("¡Gracias por la retroalimentación! No dudes en hacerme otras preguntas")
+    st.success(f"{time_stamp} ¡Gracias por la retroalimentación! No dudes en hacerme otras preguntas")
 
 def storeGood():
     storeQuery("good")
