@@ -118,8 +118,9 @@ with st.sidebar:
                                  value="",
                                  on_change=input_callback)
     # I couldn't find a way to correctly set the time zone in the deployed app
-    time_stamp = datetime.now().astimezone().strftime('%Y-%m-%d %H:%M:%S')
-    time_stamp = time_stamp + datetime.timedelta(hours=1)
+    time_stamp = datetime.now().astimezone()
+    time_stamp = time_stamp + timedelta(hours=1)
+    time_stamp = time_stamp.strftime('%Y-%m-%d %H:%M:%S')
     data = {"Date": time_stamp,
             "Text": improvements }
     db.collection("improvements").document(time_stamp).set(data)
@@ -130,7 +131,7 @@ def storeQuery(good_or_bad):
             "Question": user_input,
             "Answer": full_response }
     db.collection(f"{good_or_bad}Queries").document(time_stamp).set(data)
-    st.success(f"{time_stamp} ¡Gracias por la retroalimentación! No dudes en hacerme otras preguntas")
+    st.success("¡Gracias por la retroalimentación! No dudes en hacerme otras preguntas")
 
 def storeGood():
     storeQuery("good")
