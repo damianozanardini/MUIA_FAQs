@@ -117,12 +117,9 @@ with st.sidebar:
     improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
                                  value="",
                                  on_change=input_callback)
-    current_GMT = time.gmtime()
-    time_stamp = calendar.timegm(current_GMT)
-    time_stamp = datetime.utcfromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
+    # I couldn't find a way to correctly set the time zone in the deployed app
     time_stamp = datetime.now().astimezone().strftime('%Y-%m-%d %H:%M:%S')
-    time_stamp = time_stamp.replace(tzinfo=datetime.timezone.utc)
-    #time_stamp = datetime.now(datetime.UTC).strftime('%Y-%m-%d %H:%M:%S')
+    time_stamp = time_stamp + datetime.timedelta(hours=1)
     data = {"Date": time_stamp,
             "Text": improvements }
     db.collection("improvements").document(time_stamp).set(data)
