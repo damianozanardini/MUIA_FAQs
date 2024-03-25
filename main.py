@@ -39,8 +39,11 @@ from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth
 
+with open("improvements.txt","r") as f:
+    st.write(f.read())
+
 # Accessing Firestore depending on where the app is running
-@st.experimental_singleton
+@st.cache_resource
 def get_db():
     if runs_local:
         # Authenticate to Firestore with the JSON account key.
