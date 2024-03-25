@@ -40,7 +40,7 @@ from firebase_admin import credentials
 from firebase_admin import auth
 
 with open("firestore-key.json","w") as f:
-    f.write("{")
+    f.write("{\n")
     for x in ["type",
               "project_id",
               "private_key_id",
@@ -50,9 +50,10 @@ with open("firestore-key.json","w") as f:
               "auth_uri",
               "token_uri",
               "auth_provider_x509_cert_url",
-              "client_x509_cert_url",
-              "universe_domain"]:
-        f.write(f'    "{x}": {st.secrets[x]}')
+              "client_x509_cert_url"]:
+        f.write(f'    "{x}": {st.secrets[x]},\n')
+    f.write(f'    "universe_domain": {st.secrets["universe_domain"]}\n')
+
     f.write("}")
     f.close()
 with open("firestore-key.json","r") as f:
