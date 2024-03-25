@@ -121,6 +121,7 @@ with st.sidebar:
     time_stamp = calendar.timegm(current_GMT)
     time_stamp = datetime.utcfromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
     time_stamp = datetime.now().astimezone().strftime('%Y-%m-%d %H:%M:%S')
+    time_stamp = time_stamp.replace(tzinfo=datetime.timezone.utc)
     #time_stamp = datetime.now(datetime.UTC).strftime('%Y-%m-%d %H:%M:%S')
     data = {"Date": time_stamp,
             "Text": improvements }
