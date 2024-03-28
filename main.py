@@ -247,8 +247,7 @@ if user_input and vectorstore!=None:
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-    _, col2, col3, _ = st.columns(4)
+    # Button for giving feedback if the answer dows not seem to be correct
+    _, col2, _ = st.columns(3)
     with col2:
-        st.button(label="Me has sido útil",on_click=storeGood)
-    with col3:
-        st.button(label="No has contestado correctamente",on_click=storeBad)
+        st.button(label="No me parece que la respuesta sea adecuada",on_click=storeBad)
