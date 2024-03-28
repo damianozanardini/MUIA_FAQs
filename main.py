@@ -114,7 +114,7 @@ def input_callback():
         st.success("¡Gracias!")
 
 with st.sidebar:
-    improvements = st.text_input(label="¿Hay algo que el bot no haya sido capaz de contestar? ¡Ayúdanos a mejorarlo!",
+    improvements = st.text_input(label="¿Hay algo que el bot no esté haciendo bien? ¡Ayúdanos a mejorarlo!",
                                  value="",
                                  on_change=input_callback)
     # I couldn't find a way to correctly set the time zone in the deployed app
@@ -250,4 +250,4 @@ if user_input and vectorstore!=None:
     # Button for giving feedback if the answer dows not seem to be correct
     _, col2, _ = st.columns(3)
     with col2:
-        st.button(label="No me parece que la respuesta sea adecuada",on_click=storeBad)
+        st.button(label="Danos feedback: click si no te parece que la respuesta sea adecuada",on_click=storeBad)
