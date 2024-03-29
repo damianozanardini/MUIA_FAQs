@@ -16,10 +16,6 @@
 # This is a simple standalone implementation showing rag pipeline using Nvidia AI Foundational models.
 # It uses a simple Streamlit UI and one file implementation of a minimalistic RAG pipeline.
 
-############################################
-# Document Loader
-############################################
-
 import streamlit as st
 import os
 import csv
@@ -28,20 +24,30 @@ import calendar
 import time
 from datetime import datetime, timedelta
 
-st.set_page_config(layout = "wide")
-
-if "RUNS_LOCAL" in os.environ:
-    runs_local = os.environ["RUNS_LOCAL"] == "yes"
-else:
-    runs_local = False
-
-
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth
 
 import json
+
+ADMIN = False # The sidebar is for developing purposes only
+MODEL = "mixtral_8x7b" # "ai-llama2-70b"
+
+DOCS_DIR = os.path.abspath("./uploaded_docs")
+if not os.path.exists(DOCS_DIR):
+    os.makedirs(DOCS_DIR)
+
+st.set_page_config(layout = "wide")
+
+############################################
+# Document Loader
+############################################
+
+if "RUNS_LOCAL" in os.environ:
+    runs_local = os.environ["RUNS_LOCAL"] == "yes"
+else:
+    runs_local = False
 
 # Accessing Firestore depending on where the app is running
 # This was tricky because the only way to access the database seems to be vai the information contained
@@ -76,13 +82,6 @@ def get_db(f_name):
     return db
 
 db = get_db("firestore-key")
-
-ADMIN = False # The sidebar is for developing purposes only
-MODEL = "mixtral_8x7b" # "ai-llama2-70b"
-
-DOCS_DIR = os.path.abspath("./uploaded_docs")
-if not os.path.exists(DOCS_DIR):
-    os.makedirs(DOCS_DIR)
 
 if ADMIN:
     with st.sidebar:
