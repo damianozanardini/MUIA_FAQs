@@ -77,14 +77,14 @@ def get_db(f_name):
 
 db = get_db("firestore-key")
 
-USE_SIDEBAR = False # The sidebar is for developing purposes only
+ADMIN = True # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
 
 DOCS_DIR = os.path.abspath("./uploaded_docs")
 if not os.path.exists(DOCS_DIR):
     os.makedirs(DOCS_DIR)
 
-if USE_SIDEBAR:
+if ADMIN:
     with st.sidebar:
         st.subheader("Add to the Knowledge Base")
         with st.form("my-form", clear_on_submit=True):
@@ -149,7 +149,7 @@ from langchain.document_loaders import DirectoryLoader
 from langchain.vectorstores import FAISS
 import pickle
 
-if USE_SIDEBAR:
+if ADMIN:
     with st.sidebar:
         # Option for using an existing vector store
         use_existing_vector_store = st.radio("Use existing vector store if available", [True, False], horizontal=True)
@@ -169,11 +169,11 @@ vectorstore = None
 if use_existing_vector_store and vector_store_exists:
     with open(vector_store_path, "rb") as f:
         vectorstore = pickle.load(f)
-    if USE_SIDEBAR:
+    if ADMIN:
         with st.sidebar:
             st.success("Existing vector store loaded successfully.")
 else:
-    if USE_SIDEBAR:
+    if ADMIN:
         with st.sidebar:
             if raw_documents:
                 with st.spinner("Splitting documents into chunks..."):
@@ -219,7 +219,7 @@ from langchain_core.prompts import ChatPromptTemplate
 prompt_template = ChatPromptTemplate.from_messages(
     [("system", "Te llamas MUIAbot, y eres un asistente basado en IA. Siempre contestarás a las preguntas en Español y solo basándote en el contexto. Si alguna preguntas está fuera de contexto, dirás amablemente que no puedes contestar."), ("user", "{input}")]
 )
-user_input = st.chat_input("Escribe aquí cualquier pregunta sobre el MUIA. Intenta ser preciso.")
+user_input = st.chat_input("Escribe aquí cualquier pregunta sobre el MUIA. Intenta ser preciso, por favor.")
 llm = ChatNVIDIA(model=MODEL)
 
 chain = prompt_template | llm | StrOutputParser()
