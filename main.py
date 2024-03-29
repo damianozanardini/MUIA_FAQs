@@ -77,7 +77,7 @@ def get_db(f_name):
 
 db = get_db("firestore-key")
 
-ADMIN = True # The sidebar is for developing purposes only
+ADMIN = False # The sidebar is for developing purposes only
 MODEL = "mixtral_8x7b" # "ai-llama2-70b"
 
 DOCS_DIR = os.path.abspath("./uploaded_docs")
