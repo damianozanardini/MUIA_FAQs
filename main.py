@@ -161,7 +161,8 @@ vector_store_path = "vectorstore.pkl"
 # Load raw documents from the directory
 if ADMIN:
     raw_documents = DirectoryLoader(DOCS_DIR).load()
-
+else:
+    raw_documents = False
 
 # Check for existing vector store file
 vector_store_exists = os.path.exists(vector_store_path)
