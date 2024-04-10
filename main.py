@@ -46,7 +46,7 @@ else:
     admin_mode = False
     model = "mixtral_8x7b"
 
-DOCS_DIR = os.path.abspath("./uploaded_docs")
+DOCS_DIR = os.path.abspath("./docs")
 if not os.path.exists(DOCS_DIR):
     os.makedirs(DOCS_DIR)
 
@@ -156,6 +156,8 @@ from langchain.document_loaders import DirectoryLoader
 from langchain.vectorstores import FAISS
 import pickle
 
+# In admin mode, it is possible to re-generate the vector stores from existing files in the documents folder
+# This is done by selecting False for the radio button 
 if admin_mode:
     with st.sidebar:
         # Option for using an existing vector store
