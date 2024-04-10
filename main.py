@@ -31,8 +31,20 @@ from firebase_admin import auth
 
 import json
 
-ADMIN = False # The sidebar is for developing purposes only
-MODEL = "mixtral_8x7b" # "ai-llama2-70b"
+if "RUNS_LOCAL" in os.environ:
+    runs_local = os.environ["RUNS_LOCAL"] == "yes"
+else:
+    runs_local = False
+
+if runs_local:
+    import configparser
+    Config = configparser.ConfigParser()
+    Config.read("config.ini")
+    admin_mode = Config.get("General","Admin_mode")
+    model = Config.get("General","Model")
+else:
+    admin_mode = False
+    model = "mixtral_8x7b"
 
 DOCS_DIR = os.path.abspath("./uploaded_docs")
 if not os.path.exists(DOCS_DIR):
@@ -44,10 +56,6 @@ st.set_page_config(layout = "wide")
 # Document Loader
 ############################################
 
-if "RUNS_LOCAL" in os.environ:
-    runs_local = os.environ["RUNS_LOCAL"] == "yes"
-else:
-    runs_local = False
 
 # Accessing Firestore depending on where the app is running
 # This was tricky because the only way to access the database seems to be vai the information contained
@@ -83,17 +91,17 @@ def get_db(f_name):
 
 db = get_db("firestore-key")
 
-if ADMIN:
-    with st.sidebar:
-        st.subheader("Add to the Knowledge Base")
-        with st.form("my-form", clear_on_submit=True):
-            uploaded_files = st.file_uploader("Upload a file to the Knowledge Base:", accept_multiple_files = True)
-            submitted = st.form_submit_button("Upload!")
-        if uploaded_files and submitted:
-            for uploaded_file in uploaded_files:
-                st.success(f"File {uploaded_file.name} uploaded successfully!")
-                with open(os.path.join(DOCS_DIR, uploaded_file.name),"wb") as f:
-                    f.write(uploaded_file.read())
+#if admin_mode:
+#    with st.sidebar:
+#        st.subheader("Add to the Knowledge Base")
+#        with st.form("my-form", clear_on_submit=True):
+#            uploaded_files = st.file_uploader("Upload a file to the Knowledge Base:", accept_multiple_files = True)
+#            submitted = st.form_submit_button("Upload!")
+#        if uploaded_files and submitted:
+#            for uploaded_file in uploaded_files:
+#                st.success(f"File {uploaded_file.name} uploaded successfully!")
+#                with open(os.path.join(DOCS_DIR, uploaded_file.name),"wb") as f:
+#                    f.write(uploaded_file.read())
 
 ############################################
 # Embedding Model and LLM
@@ -148,7 +156,7 @@ from langchain.document_loaders import DirectoryLoader
 from langchain.vectorstores import FAISS
 import pickle
 
-if ADMIN:
+if admin_mode:
     with st.sidebar:
         # Option for using an existing vector store
         use_existing_vector_store = st.radio("Use existing vector store if available", [True, False], horizontal=True)
@@ -159,7 +167,7 @@ else:
 vector_store_path = "vectorstore.pkl"
 
 # Load raw documents from the directory
-if ADMIN:
+if admin_mode:
     raw_documents = DirectoryLoader(DOCS_DIR).load()
 else:
     raw_documents = False
@@ -170,11 +178,11 @@ vectorstore = None
 if use_existing_vector_store and vector_store_exists:
     with open(vector_store_path, "rb") as f:
         vectorstore = pickle.load(f)
-    if ADMIN:
+    if admin_mode:
         with st.sidebar:
             st.success("Existing vector store loaded successfully.")
 else:
-    if ADMIN:
+    if admin_mode:
         with st.sidebar:
             if raw_documents:
                 with st.spinner("Splitting documents into chunks..."):
@@ -221,7 +229,7 @@ prompt_template = ChatPromptTemplate.from_messages(
     [("system", "Te llamas MUIAbot, y eres un asistente basado en IA. Siempre contestarás a las preguntas en Español y solo basándote en el contexto. Si alguna preguntas está fuera de contexto, dirás amablemente que no puedes contestar."), ("user", "{input}")]
 )
 user_input = st.chat_input("Escribe aquí cualquier pregunta sobre el MUIA. Intenta ser preciso, por favor.")
-llm = ChatNVIDIA(model=MODEL)
+llm = ChatNVIDIA(model=model)
 
 chain = prompt_template | llm | StrOutputParser()
 
