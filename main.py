@@ -161,15 +161,28 @@ import pickle
 if admin_mode:
     with st.sidebar:
         # Option for using an existing vector store
-        use_existing_vector_store = st.radio("Use existing vector store if available", [True, False], horizontal=True)
+        compute_vector_store = st.radio(label="Re-compute vector store", options=[True, False], index=1, horizontal=True)
 else:
-    use_existing_vector_store = True
+    compute_vector_store = False
 
 # Path to the vector store file
 vector_store_path = "vectorstore.pkl"
 
-# Load raw documents from the directory
 if admin_mode:
+    # Getting additional documents from webpages
+    links = [("estudios_master","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master")] 
+    import requests
+    from bs4 import BeautifulSoup
+    # Send an HTTP request to the URL of the webpage you want to access
+    for link in links:
+        response = requests.get(link[1])
+        # Parse the HTML content using BeautifulSoup
+        soup = BeautifulSoup(response.content, "html.parser")
+        # Extract the text content of the webpage
+        text = soup.get_text()
+        with open(DOCS_DIR + "/" + link[0] + ".txt", "w") as f:
+            f.write(text)
+    # Load raw documents from the directory
     raw_documents = DirectoryLoader(DOCS_DIR).load()
 else:
     raw_documents = False
@@ -177,7 +190,7 @@ else:
 # Check for existing vector store file
 vector_store_exists = os.path.exists(vector_store_path)
 vectorstore = None
-if use_existing_vector_store and vector_store_exists:
+if not compute_vector_store and vector_store_exists:
     with open(vector_store_path, "rb") as f:
         vectorstore = pickle.load(f)
     if admin_mode:
