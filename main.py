@@ -52,6 +52,10 @@ if not os.path.exists(DOCS_DIR):
 
 st.set_page_config(layout = "wide")
 
+if admin_mode:
+    with st.sidebar:
+        st.write("*** ADMIN MODE ***")
+
 ############################################
 # Document Loader
 ############################################
@@ -146,57 +150,7 @@ def storeGood():
 def storeBad():
     storeQuery("bad")
 
-
-############################################
-# Vector Database Store
-############################################
-
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.document_loaders import DirectoryLoader
-from langchain.vectorstores import FAISS
-import pickle
-
-# In admin mode, it is possible to re-generate the vector stores from existing files in the documents folder
-# This is done by selecting False for the radio button 
-if admin_mode:
-    with st.sidebar:
-        # Option for using an existing vector store
-        compute_vector_store = st.radio(label="Re-compute vector store", options=[True, False], index=1, horizontal=True)
-else:
-    compute_vector_store = False
-
-# Path to the vector store file
-vector_store_path = "vectorstore.pkl"
-
-if admin_mode:
-    # Getting additional documents from webpages
-    links = [("estudios_master","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master")] 
-    import requests
-    from bs4 import BeautifulSoup
-    # Send an HTTP request to the URL of the webpage you want to access
-    for link in links:
-        response = requests.get(link[1])
-        # Parse the HTML content using BeautifulSoup
-        soup = BeautifulSoup(response.content, "html.parser")
-        # Extract the text content of the webpage
-        text = soup.get_text()
-        with open(DOCS_DIR + "/" + link[0] + ".txt", "w") as f:
-            f.write(text)
-    # Load raw documents from the directory
-    raw_documents = DirectoryLoader(DOCS_DIR).load()
-else:
-    raw_documents = False
-
-# Check for existing vector store file
-vector_store_exists = os.path.exists(vector_store_path)
-vectorstore = None
-if not compute_vector_store and vector_store_exists:
-    with open(vector_store_path, "rb") as f:
-        vectorstore = pickle.load(f)
-    if admin_mode:
-        with st.sidebar:
-            st.success("Existing vector store loaded successfully.")
-else:
+def recomputeVectors():
     if admin_mode:
         with st.sidebar:
             if raw_documents:
@@ -211,6 +165,7 @@ else:
                     with open(vector_store_path, "wb") as f:
                         pickle.dump(vectorstore, f)
                 st.success("Vector store created and saved.")
+                computed_vector_store = False
             else:
                 st.warning("No documents available to process!", icon="⚠️")
     else:
@@ -220,6 +175,65 @@ else:
             vectorstore = FAISS.from_documents(documents, document_embedder)
             with open(vector_store_path, "wb") as f:
                 pickle.dump(vectorstore, f)
+
+############################################
+# Vector Database Store
+############################################
+
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.document_loaders import DirectoryLoader
+from langchain.vectorstores import FAISS
+import pickle
+
+# Path to the vector store file
+vector_store_path = "vectorstore.pkl"
+
+if admin_mode:
+    # Getting additional documents from webpages
+    links = [("upm","estudios_master","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master"),
+             ("upm","requisitos","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master/Admision"),
+             ("upm","univ_espanyolas","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master/Admision/UniversidadesEspanolas"),
+             ("upm","univ_eees","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master/Admision/UniversidadesEEES"),
+             ("upm","univ_no_eees","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master/Admision/UniversidadesNoEEES"),
+             ("upm","calendario","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master/Calendario"),
+             ("upm","anexo1","https://www.upm.es/Estudiantes/Estudios_Titulaciones/Estudios_Master/Admision?fmt=detail&id=CON06502"),
+             ("muia","asignaturas","http://www.dia.fi.upm.es/masteria/?q=es/asignaturas_seminarios"),
+             ]
+    import requests
+    from bs4 import BeautifulSoup
+    # Send an HTTP request to the URL of the webpage you want to access
+    for link in links:
+        response = requests.get(link[2])
+        # Parse the HTML content using BeautifulSoup
+        soup = BeautifulSoup(response.content, "html.parser")
+        # Extract the text content of the webpage
+        text = soup.get_text()
+        if link[0] == "upm":
+            text = "Esta información se refiere a la normativa UPM, y no especificamente al MUIA. Los alumnos que pueden preinscribirse en el MUIA pertenecen a una de estas tres categorías: (1) egresados de universidades españolas; (2) egresados de universidades de países del EEES; (3) egresados de universidades que están fuera del EEES. No se puede pertenecer a más de una de estas categorías. Espacio Europeo de Educación Superior es lo mismo que EEES. " + text
+        if link[0] == "muia":
+            text = "Esta información es específica del MUIA. " + text
+        with open(DOCS_DIR + "/" + link[1] + ".txt", "w") as f:
+            f.write(text)
+    # Load raw documents from the directory
+    raw_documents = DirectoryLoader(DOCS_DIR).load()
+else:
+    raw_documents = False
+
+# In admin mode, it is possible to re-compute the vector store from existing files in the documents folder
+with st.sidebar:
+    st.button(label="Recompute vector store",on_click=recomputeVectors)
+
+# Check for existing vector store file
+vector_store_exists = os.path.exists(vector_store_path)
+vectorstore = None
+if vector_store_exists:
+    with open(vector_store_path, "rb") as f:
+        vectorstore = pickle.load(f)
+    if admin_mode:
+        with st.sidebar:
+            st.success("Existing vector store loaded successfully.")
+else:
+    recomputeVectors()
 
 ############################################
 # LLM Response Generation and Chat
@@ -241,7 +255,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
 prompt_template = ChatPromptTemplate.from_messages(
-    [("system", "Te llamas MUIAbot, y eres un asistente basado en IA. Siempre contestarás a las preguntas en Español y solo basándote en el contexto. Si alguna preguntas está fuera de contexto, dirás amablemente que no puedes contestar."), ("user", "{input}")]
+    [("system", "Te llamas MUIAbot, y eres un asistente basado en IA. Siempre contestarás a las preguntas en Español y solo basándote en el contexto. Si alguna pregunta está fuera de contexto, dirás amablemente que no puedes contestar."), ("user", "{input}")]
 )
 user_input = st.chat_input("Escribe aquí cualquier pregunta sobre el MUIA. Intenta ser preciso, por favor.")
 llm = ChatNVIDIA(model=model)

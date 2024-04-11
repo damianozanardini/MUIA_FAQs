@@ -1,0 +1,481 @@
+Esta información es específica del MUIA. 
+
+
+
+
+
+
+
+Asignaturas y seminarios | Departamento de Inteligencia Artificial
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pasar al contenido principal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+
+
+
+
+
+
+
+
+                MUIA                      
+
+
+
+                Presentación                      
+
+
+
+                FAQ                      
+
+
+
+                Objetivos y competencias                      
+
+
+
+                Admisión y matriculación                  
+
+
+
+
+
+
+
+
+
+                Requisitos de acceso y perfil de ingreso                      
+
+
+
+                Proceso de preinscripción                      
+
+
+
+                Selección y admisión de estudiantes                      
+
+
+
+                Complementos Formativos                      
+
+
+
+                Matriculación                      
+
+
+
+                Transferencia y reconocimiento de créditos                      
+
+
+
+                Sistema de Apoyo y orientación de estudiantes                      
+
+
+
+                Normativa de permanencia                      
+
+
+
+
+
+
+
+
+
+
+                Estructura                  
+
+
+
+
+
+
+
+
+
+                Planificación de las enseñanzas                      
+
+
+
+                Asignaturas y seminarios                      
+
+
+
+                Trabajo Fin de Máster                      
+
+
+
+                Solicitud del título                      
+
+
+
+
+
+
+
+
+
+
+                Profesorado y tutorías                      
+
+
+
+                Horarios                      
+
+
+
+                Becas y movilidad                  
+
+
+
+
+
+
+
+
+
+                Becas                      
+
+
+
+                Movilidad                      
+
+
+
+
+
+
+
+
+
+
+                TFM defendidos                      
+
+
+
+                Calidad                  
+
+
+
+
+
+
+
+
+
+                Sistema de Garantía Interna de la Calidad                      
+
+
+
+                Comisión Académica del MUIA (CAMIA)                      
+
+
+
+                Acreditaciones y sello EURO-INF                      
+
+
+
+                Programa de Sellos Internacionales de Calidad (SIC). Trámite de Audiencia Abierta                      
+
+
+
+                Insercción laboral de egresados                      
+
+
+
+
+
+
+
+
+
+
+                Gestión administrativa                      
+
+
+
+                Noticias                      
+
+
+
+                Solicitud del título                      
+
+
+
+
+
+
+
+
+
+Idiomas
+
+
+EnglishEspañol
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Asignaturas y seminarios
+
+
+
+
+
+
+
+Estructura
+
+Planificación de las enseñanzas
+Asignaturas y seminarios
+Trabajo Fin de Máster
+Solicitud del título
+ 
+
+
+
+
+
+Centro de I+D+i en Inteligencia Artificial de la UPM "AI.nnovation Space"
+
+
+
+
+
+
+Noticias
+
+
+
+ Concesión de Premios José Cuena para el curso 2023-2024
+ 
+ Lunes, Julio 10, 2023 - 11:24 
+ Premios a mejores Trabajos Fin de Máster 2021/2022
+ 
+ Martes, Diciembre 13, 2022 - 10:13 
+ Pedro Larrañaga nuevo miembro de Jakiunde
+ 
+ Viernes, Noviembre 25, 2022 - 13:27 
+ Los profesores del Departamento de Inteligencia Artificial de la UPM, Concha Bielza y Pedro Larrañaga, liderarán la Unidad ELLIS Madrid recientemente creada
+ 
+ Martes, Julio 5, 2022 - 13:29 
+ Concha Bielza acude a Noruega como parte del Consejo Científico Asesor del centro NorwAI (Norwegian Research Center for AI Innovation) recientemente creado.
+ 
+ Viernes, Abril 29, 2022 - 16:18 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A continuación se muestran las distintas materias (M) de las que consta el plan de estudios, así como las asignaturas y seminarios que las componen e información básica sobre los mismos. Se dispone, de manera adicional de enlaces a las guías de aprendizaje de las distintas asignaturas (A) y seminarios (S), con información completa sobre los mismos.
+Nota: Las guías de aprendizaje de los seminarios, impartidos en el segundo semestre, se publicarán según normativa de la UPM en el plazo estipulado anterior a la matrícula.
+Todas las asignaturas están disponibles en Aula Virtual (Moodle )(para los alumnos matriculados)
+Las materias de las que se compone el máster son:
+ 
+CURSO ACADÉMICO 2023-24
+M1. Fundamentos de la Investigación
+
+S1: Metodología de la investigación (2.0 ECTS) (descripción, guía de aprendizaje) 
+S2: Gestión de proyectos y análisis de riesgos (2.0 ECTS) (descripción, guía de aprendizaje) 
+S3: Aspectos éticos y legales de la Inteligencia Artificial (1.5 ECTS) (descripción, guía de aprendizaje) 
+S4: Inteligencia Artificial e inclusión (1.5 ECTS) (descripción, guía de aprendizaje) 
+
+M2. Análisis de Decisiones
+
+A1: Sistemas de ayuda a la decisión (5.0 ECTS) (descripción, guía de aprendizaje) 
+A2: Decisión participativa y negociación (5.0 ECTS) (descripción, guía de aprendizaje) (la documentación de la asignatura está en inglés pero las clases y los procesos de evaluación se realizarán en castellano)
+A3: Métodos de simulación (5.0 ECTS) (descripción, guía de aprendizaje)
+S5: Análisis de decisiones (1.5 ECTS) (descripción, guía de aprendizaje) 
+
+M3. Aprendizaje Automático
+
+A4: Redes bayesianas (5.0 ECTS) (descripción, guía de aprendizaje) (la documentación de la asignatura está en inglés pero las clases y los procesos de evaluación se realizarán en castellano)
+A5: Aprendizaje automático (5.0 ECTS) (descripción, guía de aprendizaje) (la documentación de la asignatura está en inglés pero las clases y los procesos de evaluación se realizarán en castellano) 
+A6: Redes de neuronas artificiales y Deep Learning (5.0 ECTS) (descripción, guía de aprendizaje) (la documentación de la asignatura está en inglés pero las clases y los procesos de evaluación se realizarán en castellano)
+A7: Inteligencia artificial explicable (5.0 ECTS) (guía de aprendizaje)
+S6: Aprendizaje automático (1.5 ECTS) (descripción, guía de aprendizaje)  
+
+M4. Computación Natural
+
+A8: Búsqueda inteligente basada en metaheurísticas (5.0 ECTS) (descripción, guía de aprendizaje)
+A9: Computación evolutiva (5.0 ECTS) (descripción, guía de aprendizaje) NO ES POSIBLE SELECCIONAR ESTA ASIGNATURA PARA EL CURSO 2023-24
+A10: Biología programable: Computación con ADN e Ingeniería de biocircuitos (5.0 ECTS) (descripción, guía de aprendizaje)  
+S7: Computación natural (1.5 ECTS) (descripción, guía de aprendizaje)  
+
+M5. Representación del conocimiento y Razonamiento
+
+A11: Programación lógica (5.0 ECTS) (descripción, guía de aprendizaje) 
+A12: Sistemas multiagente (5.0 ECTS) (descripción, guía de aprendizaje) (la documentación de la asignatura está en inglés pero las clases y los procesos de evaluación se realizarán en castellano)
+A13: Ingeniería ontológica (5.0 ECTS) (descripción,  guía de aprendizaje)
+A14: Modelos de razonamiento (5.0 ECTS) (descripción,  guía de aprendizaje) (la documentación de la asignatura está en inglés pero las clases y los procesos de evaluación se realizarán en castellano)
+S8: Representación del conocimiento y razonamiento (1.5 ECTS) (descripción, guía de aprendizaje) 
+S9: Lógica borrosa (1.5 ECTS) (descripción, guía de aprendizaje)
+S10: Computación cognitiva (1.5 ECTS) (descripción, guía de aprendizaje) 
+
+M6. Robótica Cognitiva y Percepción
+
+A15: Visión por computador (5.0 ECTS) (descripción, guía de aprendizaje) 
+A16: Robots autónomos (5.0 ECTS) (descripción, guía de aprendizaje)
+S11: Robótica cognitiva y percepción (1.5 ECTS) (descripción, guía de aprendizaje)
+S12: Principios de la locomoción robótica (1.5 ECTS) (descripción, guía de aprendizaje) 
+
+M7. Áreas de aplicación
+
+A17: Informática biomédica (5.0 ECTS) (descripción, guía de aprendizaje)   
+A18: Ingeniería lingüística (5.0 ECTS) (descripción, guía de aprendizaje) 
+A19: Ciencia de la web (5.0 ECTS) (descripción, guía de aprendizaje) (la documentación de la asignatura está en inglés pero las clases y los procesos de evaluación se realizarán en castellano)
+A20: Deep Learning para el Procesamiento del Lenguaje Natural (5.0 ECTS) (descripción, guía de aprendizaje)
+S13: Aplicaciones de la Inteligencia Artificial (1.5 ECTS) (descripción, guía de aprendizaje) 
+S14: Procesamiento del lenguaje natural (1.5 ECTS) (descripción, guía de aprendizaje)
+S15: Planificación automática (1.5 ECTS) (descripción, guía de aprendizaje)
+
+M8. Seminarios de profesores visitantes  
+
+: Asignatura/seminario ofertado/a en inglés
+ 
+ 
+
+Idioma 
+ Español
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+MUIA
+Presentación
+FAQ
+Objetivos y competencias
+Admisión y matriculación
+Estructura
+Profesorado y tutorías
+Horarios
+Becas y movilidad
+Calidad
+Gestión administrativa
+Noticias
+ 
+
+
+
+
+
+
+
+
+
+
+
+

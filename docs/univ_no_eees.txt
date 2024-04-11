@@ -368,6 +368,12 @@ Estudiantes
 
 
         /        Estudios Oficiales de Máster
+
+
+        /        Admisión
+
+
+        /        Egresados de Universidades NO pertenecientes al Espacio Europeo de Educación Superior (EEES)
                       
 
 
@@ -633,35 +639,44 @@ También te puede interesar:
 
 
 
-Estudios Oficiales de Máster
+Egresados en universidades de países no pertenecientes al Espacio Europeo de Educación Superior (EEES)
 
 
+Aquí puedes comprobar si tu país pertenece o no al Espacio Europeo de Educación Superior (EEES).
+La preinscripción se realizará a través del Portal UPM habilitado para la preinscripción pudiéndose solicitar un programa de máster por periodo de admisión. En caso de denegación podrá repetir la preinscripción en el siguiente plazo.
+Documentación obligatoria:
+
+Pasaporte, DNI (Documento Nacional de Identidad español), NIE (Número de Identidad de Extranjero para residentes en España).
+Curriculum Vitae.
+Título universitario oficial y Expediente Académico Oficial debidamente legalizados, o bien Homologación en caso de Másteres Habilitantes.
+Para los másteres del Anexo I es imprescindible aportar Acreditación de nivel B2 en lengua inglesa, según el Marco Común Europeo de Referencia para las Lenguas (CEFR).
+Si solicita el Máster en Formación del Profesorado la acreditación requerida es de nivel B1 en lengua extranjera.
+
+
+Nota 1: No se aceptarán documentos generados en páginas web que carezcan de validez académica
+Nota 2: Toda la documentación aportada debe estar debidamente traducida en caso de estar expedida en un idioma diferente a los oficiales en la UPM (castellano e inglés).
+Nota 3: En caso de no formalizar la reserva de plaza en el plazo estipulado la admisión se anulará.
  
 
 
 
-Vicerrectorado de Estrategia y Ordenación AcadémicaRectorado de la UPMPaseo Juan XXIII, 11. Edificio C.28040 Madridtramitacion.master.oficial@upm.es
+
+NOTA IMPORTANTE:
+Aquellos estudiantes que:
+
+NO hayan finalizado su titulación de grado, Declaración Responsable de Finalización de Estudios
+NO dispongan de documentación legalizada
+
+pueden preinscribirse, y en caso de ser admitidos esta quedará condicionada a aportar antes del 30 de septiembre la documentación definitiva:
+
+Título universitario oficial y Expediente Académico Oficial debidamente legalizados.
+
+Debe enviar la documentación requerida a tramitacion.master.oficial@upm.es. En caso contrario la admisión y la matrícula, si la hubiera, quedarán canceladas.
+
 
 
 
  
-Estos son los Programas Máster Universitarios Oficiales previstos para el Curso Académico 2024/25 en la Universidad Politécnica de Madrid. Y aquí puede consultar el Calendario de Preinscripción y Matriculación para el Curso Académico 2024/25.
-    ¿Qué pasos tengo que seguir para ser estudiante de Máster Universitario Oficial?
-Nota: Los estudiantes sin estudios previos en la UPM deberán formalizizar su Reserva de Plaza tal como se indica en el punto tres. 
-
-Requisitos y preinscripciónPara la obtención del título de Máster es necesario estar en posesión de un título universitario oficial que faculte para el acceso a enseñanzas de Máster (su aceptación no implica en ningún caso la homologación del título presentado ni su reconocimiento a otros efectos que el de cursar las enseñanzas de Máster).En caso de NO haber finalizado su titulación de grado en el momento de hacer la preinscripción puede obtener una admisión condicionada a cumplir determinados requisitos antes del 30 de septiembre (en caso contrario su admisión quedaría anulada).Los requisitos de acceso dependen del país de origen de la titulación, idioma, máster solicitado, etc.:
-  
-Portal UPM para la preinscripción
-
-AdmisiónConsiste en la adjudicación de las plazas ofertadas por la universidad para cursar enseñanzas de Máster Universitario entre quienes, cumpliendo los requisitos de acceso (los programas pueden tener requisitos específicos), lo hayan solicitado.Cada Programa Máster se encarga de la admisión de sus alumnos a través de los responsables del mismo. Periódicamente, en las fechas señaladas en el Calendario, se irán publicando en esta página las Listas de Admitidos.
-
-Reserva de PlazaTodos aquellos estudiantes que NO hayan cursado estudios previos en la UPM deben formalizar su Reserva de plaza dentro del plazo establecido en el Calendario en caso de ser admitidos en la Primera o Segunda Admisión (en la Tercera Admisión no se requiere Reserva de plaza, se pasa directamente a la Matriculación). En caso contrario la admisión se anulará.El importe de la Reserva de plaza es de 250 euros, que posteriormente se descontarán del importe de la matrícula. No habrá devolución en caso de no formalizar la matrícula.Pasos para hacer la Reserva de plaza:a) Solicitar cuenta de email UPMb) Acceder a la Plataforma de pago (Gestión de Recibos). El pago se realizará con tarjeta bancaria exclusivamente.
-
-MatriculaciónUna vez admitido, se formalizará la matrícula online (Automatrícula).Los estudiantes de nuevo ingreso deberán realizarla siguiendo estas instrucciones, además se recomienda consultar el epígrafe "¿Qué tengo que hacer antes de matricularme?". Los procesos previos de Activación de la cuenta @alumnos.upm.es y Solicitud de cita previa no se activan hasta comenzada la matrícula.También está abierta la posibilidad de realizar la matrícula a través de la Secretaría de la Escuela o Facultad responsable de la gestión del programa máster dentro del plazo establecido cuando exista algún problema para realizar Automatrícula.
-
-Las fechas de matriculación son las que figuran en el Calendario de Másteres Universitarios.
- 
-Gracias por elegirnos!!!
  
 
 
