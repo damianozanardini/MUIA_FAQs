@@ -220,8 +220,9 @@ else:
     raw_documents = False
 
 # In admin mode, it is possible to re-compute the vector store from existing files in the documents folder
-with st.sidebar:
-    st.button(label="Recompute vector store",on_click=recomputeVectors)
+if admin_mode:
+    with st.sidebar:
+        st.button(label="Recompute vector store",on_click=recomputeVectors)
 
 # Check for existing vector store file
 vector_store_exists = os.path.exists(vector_store_path)
